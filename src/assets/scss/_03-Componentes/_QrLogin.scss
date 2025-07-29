@@ -1,0 +1,165 @@
+/* =============================================
+   ESTILOS PARA COMPONENTE QR LOGIN - Mobile First
+   ============================================= */
+
+/* 1. CONTENEDOR PRINCIPAL */
+.qr-login-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* 2. ENCABEZADO */
+.qr-login-header {
+  margin-bottom: 20px;
+  
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+  }
+}
+
+/* 3. BOTÓN ACTIVAR CÁMARA */
+.qr-activate-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  max-width: 200px;
+  margin: 10px 0;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #2980b9;
+  }
+}
+
+/* 4. CONTENEDOR ESCÁNER */
+.qr-scanner-wrapper {
+  position: relative;
+  margin: 0 auto 20px;
+  max-width: 400px;
+}
+
+/* 5. VIDEO DEL ESCÁNER */
+.qr-video {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  background: #000;
+}
+
+/* 6. OVERLAY DEL ESCÁNER */
+.qr-scanner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  
+  p {
+    color: white;
+    margin-top: 15px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  }
+}
+
+/* 7. MARCO DEL ESCÁNER */
+.qr-scanner-frame {
+  width: 70%;
+  height: 70%;
+  border: 2px solid rgba(255,255,255,0.7);
+  border-radius: 5px;
+  box-shadow: 0 0 0 10000px rgba(0,0,0,0.5);
+}
+
+/* 8. MENSAJE DE ERROR */
+.qr-error-message {
+  color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* 9. PIE DE PÁGINA */
+.qr-login-footer {
+  margin-top: 20px;
+}
+
+/* 10. BOTÓN ACCESO SIN QR */
+.qr-guest-btn {
+  background: none;
+  border: none;
+  color: #3498db;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  transition: color 0.3s;
+
+  &:hover {
+    color: #2980b9;
+    
+    span {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* =============================================
+   MEDIA QUERIES - Tablet (768px)
+   ============================================= */
+@media (min-width: 768px) {
+  .qr-login-container {
+    padding: 25px;
+    max-width: 90%;
+  }
+  
+  .qr-activate-btn {
+    padding: 14px 24px;
+    font-size: 1.1rem;
+  }
+}
+
+/* =============================================
+   MEDIA QUERIES - Desktop (1024px)
+   ============================================= */
+@media (min-width: 1024px) {
+  .qr-login-container {
+    max-width: 500px;
+    padding: 30px;
+  }
+  
+  .qr-login-header {
+    h2 {
+      font-size: 1.8rem;
+    }
+    
+    p {
+      font-size: 1rem;
+    }
+  }
+}

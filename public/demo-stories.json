@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "user": {
+      "id": 101,
+      "name": "Ana López",
+      "avatar": "/img/09-perfiles/ana.jpg"
+    },
+    "items": [
+      {
+        "type": "image",
+        "url": "/img/stories/ana-1.jpg",
+        "duration": 5
+      },
+      {
+        "type": "image",
+        "url": "/img/stories/ana-2.jpg",
+        "duration": 5
+      }
+    ],
+    "timestamp": "2023-05-15T14:30:00Z"
+  },
+  {
+    "id": 2,
+    "user": {
+      "id": 102,
+      "name": "Carlos Mendez",
+      "avatar": "/img/09-perfiles/carlos.jpg"
+    },
+    "items": [
+      {
+        "type": "video",
+        "url": "/video/stories/carlos-1.mp4",
+        "duration": 8
+      }
+    ],
+    "timestamp": "2023-05-15T15:45:00Z"
+  },
+  {
+    "id": 3,
+    "user": {
+      "id": 103,
+      "name": "Laura García",
+      "avatar": "/img/09-perfiles/laura.jpg"
+    },
+    "items": [
+      {
+        "type": "image",
+        "url": "/img/stories/laura-1.jpg",
+        "duration": 5
+      },
+      {
+        "type": "image",
+        "url": "/img/stories/laura-2.jpg",
+        "duration": 5
+      },
+      {
+        "type": "image",
+        "url": "/img/stories/laura-3.jpg",
+        "duration": 5
+      }
+    ],
+    "timestamp": "2023-05-15T16:20:00Z"
+  }
+]

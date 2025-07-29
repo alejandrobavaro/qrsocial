@@ -1,0 +1,301 @@
+// =============================================
+// ESTILOS POST - Versión Instagram (Mejorado)
+// =============================================
+
+.instagram-post {
+  background-color: #ffffff;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  // Vista detalle (si se usa como PostDetails)
+  &.detail-view {
+    max-width: 800px;
+    
+    .post-image-container {
+      aspect-ratio: 4/5;
+    }
+    
+    .post-caption {
+      padding: 0 1rem 1rem;
+      cursor: auto;
+    }
+  }
+
+  // Encabezado del post
+  .post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.875rem 1rem;
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+
+      .author-avatar {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        margin-right: 0.75rem;
+        object-fit: cover;
+      }
+
+      .author-name {
+        font-weight: 600;
+        font-size: 0.875rem;
+        margin-right: 0.5rem;
+      }
+      
+      .author-relation {
+        font-size: 0.75rem;
+        color: #8e8e8e;
+        &::before {
+          content: "•";
+          margin: 0 0.25rem;
+        }
+      }
+    }
+
+    .options-btn {
+      background: none;
+      border: none;
+      font-size: 1.125rem;
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+  }
+
+  // Contenedor de imagen
+  .post-image-container {
+    width: 100%;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fafafa;
+
+    .post-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+      
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+  }
+
+  // Sección de acciones
+  .post-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+
+    .left-actions {
+      display: flex;
+      gap: 1rem;
+
+      .action-btn {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.25rem;
+        transition: transform 0.2s;
+        
+        &:active {
+          transform: scale(0.9);
+        }
+
+        &.liked {
+          color: #ed4956;
+          animation: heartBeat 0.5s;
+        }
+      }
+    }
+  }
+
+  // Contador de likes
+  .likes-count {
+    padding: 0 1rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+
+  // Descripción del post
+  .post-caption {
+    padding: 0 1rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    cursor: pointer;
+
+    .author-name {
+      font-weight: 600;
+      margin-right: 0.25rem;
+    }
+
+    .read-more {
+      color: #8e8e8e;
+      font-weight: normal;
+    }
+  }
+
+  // Sección de comentarios
+  .comments-section {
+    padding: 0 1rem 0.75rem;
+    border-top: 1px solid #efefef;
+    margin-top: 0.5rem;
+
+    .comment {
+      display: flex;
+      margin: 0.75rem 0;
+
+      .comment-avatar {
+        width: 1.75rem;
+        height: 1.75rem;
+        border-radius: 50%;
+        margin-right: 0.75rem;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+
+      .comment-content {
+        .comment-author {
+          font-weight: 600;
+          font-size: 0.8125rem;
+          margin-right: 0.25rem;
+        }
+
+        .comment-text {
+          font-size: 0.8125rem;
+          margin: 0;
+          display: inline;
+          word-break: break-word;
+        }
+      }
+    }
+
+    .no-comments {
+      color: #8e8e8e;
+      font-size: 0.875rem;
+      text-align: center;
+      margin: 0.75rem 0;
+    }
+    
+    // Formulario de comentario
+    .comment-form {
+      display: flex;
+      margin-top: 0.75rem;
+      border-top: 1px solid #efefef;
+      padding-top: 0.75rem;
+      
+      .comment-input {
+        flex-grow: 1;
+        border: none;
+        padding: 0.5rem;
+        font-size: 0.875rem;
+        
+        &:focus {
+          outline: none;
+        }
+      }
+      
+      .comment-submit {
+        background: none;
+        border: none;
+        color: #0095f6;
+        font-weight: 600;
+        padding: 0 0.5rem;
+        cursor: pointer;
+        
+        &:disabled {
+          opacity: 0.5;
+          cursor: default;
+        }
+      }
+    }
+  }
+}
+
+// Animación para like
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.2); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+// ============= RESPONSIVE =============
+
+// Tablet (768px)
+@media (min-width: 768px) {
+  .instagram-post {
+    margin-bottom: 2rem;
+
+    .post-header {
+      padding: 1rem 1.25rem;
+
+      .author-avatar {
+        width: 2.25rem;
+        height: 2.25rem;
+      }
+      
+      .author-name {
+        font-size: 1rem;
+      }
+    }
+
+    .post-actions {
+      padding: 0.625rem 1.25rem;
+    }
+
+    .post-caption {
+      padding: 0 1.25rem 0.625rem;
+      font-size: 1rem;
+    }
+
+    .comments-section {
+      padding: 0 1.25rem 1rem;
+    }
+  }
+}
+
+// Escritorio (1024px)
+@media (min-width: 1024px) {
+  .instagram-post {
+    margin-bottom: 2.5rem;
+    
+    &.detail-view {
+      display: flex;
+      flex-wrap: wrap;
+      
+      .post-header {
+        width: 100%;
+      }
+      
+      .post-image-container {
+        width: 60%;
+        aspect-ratio: 1/1;
+      }
+      
+      .post-actions,
+      .likes-count,
+      .post-caption,
+      .comments-section {
+        width: 40%;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "user": {
+      "id": 101,
+      "name": "María González",
+      "avatar": "/img/09-perfiles/feli.jpg",
+      "relation": "Novia"
+    },
+      "imageUrl": "/img/11-postdemo/post1.jpg",
+    "caption": "¡Finalmente encontré el vestido perfecto! No puedo esperar para que Carlos lo vea. #Emocionada #BodaPerfecta",
+    "likes": 42,
+    "comments": [
+      {
+        "id": 1011,
+        "user": {
+          "id": 102,
+          "name": "Carlos Mendez",
+          "avatar": "/img/09-perfiles/feli.jpg"
+        },
+        "text": "Estoy seguro que te ves hermosa, no puedo esperar para verte ❤️"
+      },
+      {
+        "id": 1012,
+        "user": {
+          "id": 103,
+          "name": "Ana López",
+          "avatar": "/img/09-perfiles/ana.jpg"
+        },
+        "text": "¡Es precioso! Perfecto para ti."
+      }
+    ],
+    "timestamp": "2023-06-15T14:30:00Z"
+  },
+  {
+    "id": 2,
+    "user": {
+      "id": 102,
+      "name": "Carlos Mendez",
+      "avatar": "/img/09-perfiles/feli.jpg",
+      "relation": "Novio"
+    },
+      "imageUrl": "/img/11-postdemo/post1.jpg",
+    "caption": "El lugar de la ceremonia ya está listo. ¡Quedó exactamente como lo imaginamos!",
+    "likes": 38,
+    "comments": [
+      {
+        "id": 1021,
+        "user": {
+          "id": 101,
+          "name": "María González",
+          "avatar": "/img/09-perfiles/feli.jpg"
+        },
+        "text": "¡Quedó increíble! No podría estar más feliz con nuestra elección."
+      }
+    ],
+    "timestamp": "2023-06-18T09:15:00Z"
+  },
+  {
+    "id": 3,
+    "user": {
+      "id": 103,
+      "name": "Ana López",
+      "avatar": "/img/09-perfiles/feli.jpg",
+      "relation": "Dama de honor"
+    },
+    "imageUrl": "/img/11-postdemo/post1.jpg",
+    "caption": "Celebrando la despedida de soltera de María con las chicas. ¡Qué noche increíble! #BrideToBe",
+    "likes": 56,
+    "comments": [],
+    "timestamp": "2023-06-20T22:45:00Z"
+  },
+  {
+    "id": 4,
+    "user": {
+      "id": 104,
+      "name": "Roberto Sánchez",
+      "avatar": "/img/09-perfiles/feli.jpg",
+      "relation": "Padre de la novia"
+    },
+    "imageUrl": "/img/11-postdemo/post2 - copia.jpg",
+    "caption": "Reunión familiar previa a la boda. Bendecido por tener a toda la familia junta en este momento especial.",
+    "likes": 29,
+    "comments": [
+      {
+        "id": 1041,
+        "user": {
+          "id": 101,
+          "name": "María González",
+          "avatar": "/img/09-perfiles/feli.jpg"
+        },
+        "text": "¡Gracias por todo tu apoyo papá! Te quiero mucho."
+      },
+      {
+        "id": 1042,
+        "user": {
+          "id": 105,
+          "name": "Laura Fernández",
+          "avatar": "/img/09-perfiles/post2 - copia.jpg"
+        },
+        "text": "Hermosa reunión. La familia es lo más importante."
+      }
+    ],
+    "timestamp": "2023-06-22T20:00:00Z"
+  }
+]

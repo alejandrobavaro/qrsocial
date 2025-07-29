@@ -1,0 +1,129 @@
+// =============================================
+// ESTILOS STORIES - Historias Temporales
+// =============================================
+
+// Contenedor principal de stories
+.stories-container {
+  display: flex;
+  gap: 0.8rem;
+  padding: 1rem 0.5rem;
+  overflow-x: auto;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  
+  // Ocultar scrollbar pero mantener funcionalidad
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
+  // Cada item de story
+  .story-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    
+    // Contenedor del avatar con borde
+    .story-avatar-wrapper {
+      position: relative;
+      width: 66px;
+      height: 66px;
+      padding: 2px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      
+      // Avatar del usuario
+      .story-avatar {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 2px solid white;
+        object-fit: cover;
+        display: block;
+      }
+      
+      // Botón para añadir story (solo en el usuario actual)
+      .add-story-btn {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 20px;
+        height: 20px;
+        background: #0095f6;
+        color: white;
+        border: 2px solid white;
+        border-radius: 50%;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+      }
+    }
+    
+    // Nombre de usuario debajo del avatar
+    .story-username {
+      font-size: 0.7rem;
+      max-width: 72px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    // Estilo para stories ya vistas
+    &.viewed {
+      .story-avatar-wrapper {
+        background: #dbdbdb;
+      }
+    }
+    
+    // Estilo específico para el usuario actual
+    &.current-user {
+      .story-avatar-wrapper {
+        background: transparent;
+        border: 1px solid #dbdbdb;
+      }
+    }
+  }
+}
+
+// Estilos responsivos
+@media (min-width: 768px) {
+  .stories-container {
+    gap: 1.2rem;
+    padding: 1.2rem 0.8rem;
+    
+    .story-item {
+      .story-avatar-wrapper {
+        width: 72px;
+        height: 72px;
+      }
+      
+      .story-username {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .stories-container {
+    gap: 1.5rem;
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+    
+    .story-item {
+      .story-avatar-wrapper {
+        width: 78px;
+        height: 78px;
+      }
+      
+      .story-username {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+// =============================================
+// ARCHIVO PRINCIPAL DE ESTILOS - QR SOCIAL
+// Importa todos los partials SCSS del proyecto
+// =============================================
+
+//------------GENERAL--------------//
+@import "./_01-General/_App";
+
+//------------COMPONENTES ESTRUCTURALES--------------//
+@import "./_03-Componentes/_MainLayout";
+@import "./_03-Componentes/_Header";
+@import "./_03-Componentes/_Footer";
+@import "./_03-Componentes/_FooterGondraWorldDev";
+@import "./_03-Componentes/_MainWhatsappIcon";
+@import "./_03-Componentes/_Notifications";
+
+//------------AUTENTICACIÓN--------------//
+@import "./_03-Componentes/_LoginPage";
+@import "./_03-Componentes/_QrLogin";
+
+//------------PÁGINAS PÚBLICAS--------------//
+@import "./_03-Componentes/_LandingPage";
+@import "./_03-Componentes/_PPublicoQrSocialPost";
+@import "./_03-Componentes/_PPublicoContacto";
+@import "./_03-Componentes/_PPublicoContactoForm";
+@import "./_03-Componentes/_PPublicoGaleriaFotosHome";
+
+//------------COMPONENTES DE USUARIO--------------//
+@import "./_03-Componentes/_FeedPage";
+@import "./_03-Componentes/_ProfilePage";
+@import "./_03-Componentes/_Post";
+@import "./_03-Componentes/_PostForm";
+@import "./_03-Componentes/_Stories";
+@import "./_03-Componentes/_StoriesCarousel";
+@import "./_03-Componentes/_ShareModal";
+
+//------------PANEL ADMINISTRACIÓN--------------//
+@import "./_03-Componentes/_AdminLayout";
+@import "./_03-Componentes/_GuestManager";
+@import "./_03-Componentes/_ContentManager";
+@import "./_03-Componentes/_DataExporter.scss";

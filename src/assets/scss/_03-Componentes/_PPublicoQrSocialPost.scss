@@ -1,0 +1,358 @@
+/* Estilos base - Mobile First */
+.qr-social-container {
+  max-width: 412px;
+  margin: 0 auto;
+  padding: 15px;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-family: 'Cormorant Garamond', serif;
+  background: #fff9f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(90, 45, 45, 0.1);
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: #5a2d2d;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #8c5e3d;
+    margin-bottom: 20px;
+  }
+}
+
+.qr-upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 25px;
+  padding: 15px;
+  background: #f8f5f2;
+  border-radius: 8px;
+
+  .qr-box, .upload-box {
+    text-align: center;
+
+    h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      color: #5a2d2d;
+      margin-bottom: 10px;
+    }
+  }
+
+  .qr-code {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-bottom: 8px;
+
+    p {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 8px;
+    }
+  }
+
+  .upload-btn {
+    background: #5a2d2d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:disabled {
+      opacity: 0.7;
+    }
+  }
+
+  .upload-note {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 8px;
+  }
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 15px;
+
+  .empty-gallery {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 30px 0;
+    color: #8c5e3d;
+    font-size: 0.95rem;
+  }
+
+  .gallery-item {
+    aspect-ratio: 1/1;
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #f1f1f1;
+
+    img, video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+/* Formulario de autor */
+.author-form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  padding: 15px;
+
+  .author-form-container {
+    background: white;
+    width: 100%;
+    max-width: 380px;
+    padding: 20px;
+    border-radius: 10px;
+
+    h3 {
+      font-family: 'Cinzel', serif;
+      text-align: center;
+      margin-bottom: 15px;
+      color: #5a2d2d;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 0.9rem;
+      }
+
+      input, textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 0.95rem;
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 15px;
+
+      button {
+        padding: 8px 15px;
+        border-radius: 5px;
+        font-size: 0.95rem;
+        cursor: pointer;
+      }
+
+      .cancel-btn {
+        background: #f1f1f1;
+      }
+
+      .submit-btn {
+        background: #5a2d2d;
+        color: white;
+      }
+    }
+  }
+}
+
+/* Modal de post */
+.post-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+
+  .post-modal-container {
+    background: white;
+    width: 100%;
+    max-width: 380px;
+    border-radius: 10px;
+    overflow: hidden;
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: pointer;
+    }
+
+    .modal-media-container {
+      height: 300px;
+      position: relative;
+
+      img, video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .nav-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.7);
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &.prev {
+          left: 10px;
+        }
+
+        &.next {
+          right: 10px;
+        }
+      }
+    }
+
+    .modal-post-info {
+      padding: 15px;
+
+      .author-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+
+        .author-avatar {
+          width: 40px;
+          height: 40px;
+          background: #5a2d2d;
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+        }
+      }
+
+      .post-actions {
+        margin-top: 15px;
+
+        .like-btn {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          background: none;
+          border: none;
+          color: #5a2d2d;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+/* Tablet (768px+) */
+@media (min-width: 768px) {
+  .qr-social-container {
+    max-width: 768px;
+    padding: 20px;
+
+    .section-title {
+      font-size: 1.8rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+    }
+  }
+
+  .qr-upload-section {
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;
+
+    .qr-box, .upload-box {
+      flex: 1;
+      max-width: 300px;
+    }
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+
+  .post-modal-overlay .post-modal-container {
+    max-width: 700px;
+    display: flex;
+
+    .modal-media-container {
+      flex: 1;
+      height: auto;
+    }
+
+    .modal-post-info {
+      width: 250px;
+    }
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  .qr-social-container {
+    max-width: 1000px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .post-modal-overlay .post-modal-container {
+    max-width: 800px;
+
+    .modal-media-container {
+      height: 500px;
+    }
+  }
+}

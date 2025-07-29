@@ -1,0 +1,95 @@
+// =========================================================
+// ESTILOS PRINCIPALES DEL LAYOUT
+// =========================================================
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    background-color: #fff;
+    overflow-x: hidden;
+    
+    // Asegura que el footer quede abajo incluso con poco contenido
+    > main {
+      flex: 1;
+    }
+  }
+  
+  // =========================================================
+  // ESTILOS DEL CONTENIDO PRINCIPAL
+  // =========================================================
+  
+  .main-content {
+    padding-top: 80px; // Ajuste para el header fijo
+    padding-bottom: 2rem;
+    transition: all 0.3s ease;
+    
+    @media (max-width: 992px) {
+      padding-top: 70px;
+    }
+    
+    @media (max-width: 768px) {
+      padding-top: 60px;
+    }
+  }
+  
+  .content-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    
+    @media (max-width: 576px) {
+      padding: 0 1rem;
+    }
+  }
+  
+  // =========================================================
+  // EFECTOS Y UTILITARIOS
+  // =========================================================
+  
+  // Transición suave para cambios de página
+  .page-transition {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    
+    &.exiting {
+      opacity: 0;
+    }
+  }
+  
+  // =========================================================
+  // RESPONSIVE ADICIONAL
+  // =========================================================
+  
+  @media (max-width: 480px) {
+    .main-content {
+      padding-top: 55px;
+      padding-bottom: 1.5rem;
+    }
+    
+    .content-wrapper {
+      padding: 0 0.75rem;
+    }
+  }
+  
+  // =========================================================
+  // ESTILOS ESPECÍFICOS PARA DISPOSITIVOS PEQUEÑOS
+  // =========================================================
+  
+  .small-device-only {
+    display: none;
+    
+    @media (max-width: 768px) {
+      display: block;
+    }
+  }
+  
+  .large-device-only {
+    display: block;
+    
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }

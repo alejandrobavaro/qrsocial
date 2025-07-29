@@ -1,0 +1,515 @@
+{
+  "novios": {
+    "novia": "Fabiola Lutrario",
+    "novio": "Alejandro Bavaro",
+    "contacto": {
+      "telefono": "+54 9 223 555-1234",
+      "email": "fabiolayalejandro@bodas.com"
+    },
+    "fotos": {
+      "novia": "/img/09-perfiles/fabiola.jpg",
+      "novio": "/img/09-perfiles/alejandro.jpg",
+      "pareja": "/img/09-perfiles/pareja.jpg"
+    }
+  },
+  "grupos": [
+    {
+      "nombre": "Familia Novia",
+      "invitados": [
+        {
+          "id": 1,
+          "nombre": "Ana Maria",
+          "apellido": "Lutrario",
+          "relacion": "Tía paterna",
+          "acompanantes": 0,
+          "contacto": {
+            "whatsapp": "+5492235550001",
+            "telefono": "+542235550001",
+            "email": "ana.lutrario@example.com"
+          },
+          "imagen": "/img/09-perfiles/ana_maria.jpg",
+          "qr_data": {
+            "codigo": "qr_1_ana_maria",
+            "hash": "a1b2c3d4e5",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 2,
+          "nombre": "Mario Vincenzo",
+          "apellido": "Lutrario",
+          "relacion": "Padre de la novia",
+          "acompanantes": 0,
+          "contacto": {
+            "whatsapp": "+5492235550002",
+            "telefono": "+542235550002",
+            "email": "mario.lutrario@example.com"
+          },
+          "imagen": "/img/09-perfiles/mario.jpg",
+          "qr_data": {
+            "codigo": "qr_2_mario",
+            "hash": "b2c3d4e5f6",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 3,
+          "nombre": "Norma",
+          "apellido": "Perez",
+          "relacion": "Amiga de la tía Ana",
+          "acompanantes": 0,
+          "contacto": {
+            "whatsapp": "+5492235550003",
+            "telefono": "+542235550003",
+            "email": "norma.perez@example.com"
+          },
+          "imagen": "/img/09-perfiles/norma.jpg",
+          "qr_data": {
+            "codigo": "qr_3_norma",
+            "hash": "c3d4e5f6g7",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 4,
+          "nombre": "Monica",
+          "apellido": "Tetamantti",
+          "relacion": "Amiga de la tía Ana",
+          "acompanantes": 0,
+          "contacto": {
+            "whatsapp": "+5492235550004",
+            "telefono": "+542235550004",
+            "email": "monica.tetamantti@example.com"
+          },
+          "imagen": "/img/09-perfiles/monica.jpg",
+          "qr_data": {
+            "codigo": "qr_4_monica",
+            "hash": "d4e5f6g7h8",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 5,
+          "nombre": "Maria",
+          "apellido": "Teresa",
+          "relacion": "Amiga de la tía Ana",
+          "acompanantes": 0,
+          "contacto": {
+            "whatsapp": "+5492235550005",
+            "telefono": "+542235550005",
+            "email": "maria.teresa@example.com"
+          },
+          "imagen": "/img/09-perfiles/maria_teresa.jpg",
+          "qr_data": {
+            "codigo": "qr_5_maria",
+            "hash": "e5f6g7h8i9",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 6,
+          "nombre": "Deliana",
+          "apellido": "Fernandez",
+          "relacion": "Ahijada de la tía Ana",
+          "acompanantes": 1,
+          "contacto": {
+            "whatsapp": "+5492235550006",
+            "telefono": "+542235550006",
+            "email": "deliana.fernandez@example.com"
+          },
+          "imagen": "/img/09-perfiles/deliana.jpg",
+          "qr_data": {
+            "codigo": "qr_6_deliana",
+            "hash": "f6g7h8i9j0",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 7,
+          "nombre": "Jorge",
+          "apellido": "Di Norcia",
+          "relacion": "Primo paterno",
+          "acompanantes": 2,
+          "contacto": {
+            "whatsapp": "+5492235550007",
+            "telefono": "+542235550007",
+            "email": "jorge.dinorcia@example.com"
+          },
+          "imagen": "/img/09-perfiles/jorge.jpg",
+          "qr_data": {
+            "codigo": "qr_7_jorge",
+            "hash": "g7h8i9j0k1",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 8,
+          "nombre": "Mirta",
+          "apellido": "Arrighini",
+          "relacion": "Prima paterna",
+          "acompanantes": 0,
+          "contacto": {
+            "whatsapp": "+5492235550008",
+            "telefono": "+542235550008",
+            "email": "mirta.arrighini@example.com"
+          },
+          "imagen": "/img/09-perfiles/mirta.jpg",
+          "qr_data": {
+            "codigo": "qr_8_mirta",
+            "hash": "h8i9j0k1l2",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 9,
+          "nombre": "Joaquin",
+          "apellido": "Conti",
+          "relacion": "Hermanastro (Fefe)",
+          "acompanantes": 0,
+          "contacto": {
+            "whatsapp": "+5492235550009",
+            "telefono": "+542235550009",
+            "email": "joaquin.conti@example.com"
+          },
+          "imagen": "/img/09-perfiles/joaquin.jpg",
+          "qr_data": {
+            "codigo": "qr_9_joaquin",
+            "hash": "i9j0k1l2m3",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 10,
+          "nombre": "Julieta Ruiz",
+          "apellido": "Conti",
+          "relacion": "Cuñada (esposa de Joaquín)",
+          "acompanantes": 0,
+          "contacto": {
+            "whatsapp": "+5492235550010",
+            "telefono": "+542235550010",
+            "email": "julieta.ruiz@example.com"
+          },
+          "imagen": "/img/09-perfiles/julieta.jpg",
+          "qr_data": {
+            "codigo": "qr_10_julieta",
+            "hash": "j0k1l2m3n4",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 11,
+          "nombre": "GianFranco",
+          "apellido": "Lutrario",
+          "relacion": "Hermano de la novia",
+          "acompanantes": 1,
+          "contacto": {
+            "whatsapp": "+5492235550011",
+            "telefono": "+542235550011",
+            "email": "gian.lutrario@example.com"
+          },
+          "imagen": "/img/09-perfiles/gianfranco.jpg",
+          "qr_data": {
+            "codigo": "qr_11_gian",
+            "hash": "k1l2m3n4o5",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 12,
+          "nombre": "Francis",
+          "apellido": "Arteaga",
+          "relacion": "Amiga de Fabiola desde la infancia",
+          "acompanantes": 0,
+          "contacto": {
+            "whatsapp": "+5492235550012",
+            "telefono": "+542235550012",
+            "email": "francis.arteaga@example.com"
+          },
+          "imagen": "/img/09-perfiles/francis.jpg",
+          "qr_data": {
+            "codigo": "qr_12_francis",
+            "hash": "l2m3n4o5p6",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 13,
+          "nombre": "Aurimar",
+          "apellido": "Gómez",
+          "relacion": "Amiga de Fabiola de la universidad",
+          "acompanantes": 1,
+          "contacto": {
+            "whatsapp": "+5492235550013",
+            "telefono": "+542235550013",
+            "email": "aurimar.gomez@example.com"
+          },
+          "imagen": "/img/09-perfiles/aurimar.jpg",
+          "qr_data": {
+            "codigo": "qr_13_aurimar",
+            "hash": "m3n4o5p6q7",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 14,
+          "nombre": "Antonio",
+          "apellido": "Álvarez",
+          "relacion": "Amigo de Fabiola del trabajo",
+          "acompanantes": 0,
+          "contacto": {
+            "whatsapp": "+5492235550014",
+            "telefono": "+542235550014",
+            "email": "antonio.alvarez@example.com"
+          },
+          "imagen": "/img/09-perfiles/antonio.jpg",
+          "qr_data": {
+            "codigo": "qr_14_antonio",
+            "hash": "n4o5p6q7r8",
+            "validez": "2023-12-31"
+          }
+        }
+      ]
+    },
+    {
+      "nombre": "Familia Novio",
+      "invitados": [
+        {
+          "id": 15,
+          "nombre": "Miguel",
+          "apellido": "Bavaro",
+          "relacion": "Padre del novio",
+          "acompanantes": 0,
+          "contacto": {
+            "whatsapp": "+5492235550015",
+            "telefono": "+542235550015",
+            "email": "miguel.bavaro@example.com"
+          },
+          "imagen": "/img/09-perfiles/miguel.jpg",
+          "qr_data": {
+            "codigo": "qr_15_miguel",
+            "hash": "o5p6q7r8s9",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 16,
+          "nombre": "Elina",
+          "apellido": "Calvo Parra",
+          "relacion": "Madre del novio",
+          "acompanantes": 0,
+          "contacto": {
+            "whatsapp": "+5492235550016",
+            "telefono": "+542235550016",
+            "email": "elina.calvo@example.com"
+          },
+          "imagen": "/img/09-perfiles/elina.jpg",
+          "qr_data": {
+            "codigo": "qr_16_elina",
+            "hash": "p6q7r8s9t0",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 17,
+          "nombre": "Emilia",
+          "apellido": "Calvo Parra",
+          "relacion": "Tía materna",
+          "acompanantes": 0,
+          "contacto": {
+            "whatsapp": "+5492235550017",
+            "telefono": "+542235550017",
+            "email": "emilia.calvo@example.com"
+          },
+          "imagen": "/img/09-perfiles/emilia.jpg",
+          "qr_data": {
+            "codigo": "qr_17_emilia",
+            "hash": "q7r8s9t0u1",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 18,
+          "nombre": "Pantaleon",
+          "apellido": "Mattiolli",
+          "relacion": "Tío político",
+          "acompanantes": 0,
+          "contacto": {
+            "whatsapp": "+5492235550018",
+            "telefono": "+542235550018",
+            "email": "pantaleon.mattiolli@example.com"
+          },
+          "imagen": "/img/09-perfiles/pantaleon.jpg",
+          "qr_data": {
+            "codigo": "qr_18_pantaleon",
+            "hash": "r8s9t0u1v2",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 19,
+          "nombre": "Gabriela",
+          "apellido": "Mattiolli",
+          "relacion": "Prima materna",
+          "acompanantes": 1,
+          "contacto": {
+            "whatsapp": "+5492235550019",
+            "telefono": "+542235550019",
+            "email": "gabriela.mattiolli@example.com"
+          },
+          "imagen": "/img/09-perfiles/gabriela.jpg",
+          "qr_data": {
+            "codigo": "qr_19_gabriela",
+            "hash": "s9t0u1v2w3",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 20,
+          "nombre": "Alba",
+          "apellido": "Mattiolli",
+          "relacion": "Ahijada del novio",
+          "acompanantes": 0,
+          "contacto": {
+            "whatsapp": "+5492235550020",
+            "telefono": "+542235550020",
+            "email": "alba.mattiolli@example.com"
+          },
+          "imagen": "/img/09-perfiles/alba.jpg",
+          "qr_data": {
+            "codigo": "qr_20_alba",
+            "hash": "t0u1v2w3x4",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 21,
+          "nombre": "Silvana",
+          "apellido": "Mattiolli",
+          "relacion": "Prima materna",
+          "acompanantes": 1,
+          "contacto": {
+            "whatsapp": "+5492235550021",
+            "telefono": "+542235550021",
+            "email": "silvana.mattiolli@example.com"
+          },
+          "imagen": "/img/09-perfiles/silvana.jpg",
+          "qr_data": {
+            "codigo": "qr_21_silvana",
+            "hash": "u1v2w3x4y5",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 22,
+          "nombre": "José",
+          "apellido": "Martinez",
+          "relacion": "Pareja de Silvana",
+          "acompanantes": 0,
+          "contacto": {
+            "whatsapp": "+5492235550022",
+            "telefono": "+542235550022",
+            "email": "pepe.martinez@example.com"
+          },
+          "imagen": "/img/09-perfiles/pepe.jpg",
+          "qr_data": {
+            "codigo": "qr_22_pepe",
+            "hash": "v2w3x4y5z6",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 23,
+          "nombre": "Carmela",
+          "apellido": "Ozzano",
+          "relacion": "Tía abuela materna",
+          "acompanantes": 0,
+          "contacto": {
+            "whatsapp": "+5492235550023",
+            "telefono": "+542235550023",
+            "email": "carmela.ozzano@example.com"
+          },
+          "imagen": "/img/09-perfiles/carmela.jpg",
+          "qr_data": {
+            "codigo": "qr_23_carmela",
+            "hash": "w3x4y5z6a7",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 24,
+          "nombre": "Mavi",
+          "apellido": "Ozzano",
+          "relacion": "Ahijada del novio",
+          "acompanantes": 1,
+          "contacto": {
+            "whatsapp": "+5492235550024",
+            "telefono": "+542235550024",
+            "email": "mavi.ozzano@example.com"
+          },
+          "imagen": "/img/09-perfiles/mavi.jpg",
+          "qr_data": {
+            "codigo": "qr_24_mavi",
+            "hash": "x4y5z6a7b8",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 25,
+          "nombre": "Livia",
+          "apellido": "Ozzano",
+          "relacion": "Prima materna",
+          "acompanantes": 1,
+          "contacto": {
+            "whatsapp": "+5492235550025",
+            "telefono": "+542235550025",
+            "email": "livia.ozzano@example.com"
+          },
+          "imagen": "/img/09-perfiles/livia.jpg",
+          "qr_data": {
+            "codigo": "qr_25_livia",
+            "hash": "y5z6a7b8c9",
+            "validez": "2023-12-31"
+          }
+        },
+        {
+          "id": 26,
+          "nombre": "Raul",
+          "apellido": "Luna",
+          "relacion": "Pareja de Livia",
+          "acompanantes": 0,
+          "contacto": {
+            "whatsapp": "+5492235550026",
+            "telefono": "+542235550026",
+            "email": "raul.luna@example.com"
+          },
+          "imagen": "/img/09-perfiles/raul.jpg",
+          "qr_data": {
+            "codigo": "qr_26_raul",
+            "hash": "z6a7b8c9d0",
+            "validez": "2023-12-31"
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "acceso_prueba": {
+      "habilitado": true,
+      "usuario_prueba": {
+        "id": 999,
+        "nombre": "Invitado",
+        "apellido": "Prueba",
+        "imagen": "/img/09-perfiles/invitado.jpg",
+        "qr_data": {
+          "codigo": "dev_qr_999",
+          "hash": "z9y8x7w6v5",
+          "validez": "2023-12-31"
+        }
+      }
+    },
+    "qr_settings": {
+      "formato": "id:{id},nombre:{nombre},apellido:{apellido}",
+      "version": "1.0"
+    }
+  }
+}

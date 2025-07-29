@@ -1,0 +1,183 @@
+// =============================================
+// ESTILOS MODAL DE COMPARTIR
+// =============================================
+
+// Overlay de fondo oscuro
+.share-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+// Contenedor principal del modal
+.share-modal {
+  width: 90%;
+  max-width: 450px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.3s ease-out;
+
+  // Encabezado del modal
+  .modal-header {
+    padding: 1rem;
+    border-bottom: 1px solid #dbdbdb;
+    
+    h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      text-align: center;
+      color: #262626;
+    }
+  }
+
+  // Contenedor de la URL
+  .share-url-container {
+    padding: 1.5rem 1rem;
+    
+    .share-instruction {
+      margin: 0 0 0.8rem 0;
+      font-size: 0.9rem;
+      color: #8e8e8e;
+      text-align: center;
+    }
+    
+    .share-url {
+      display: flex;
+      border: 1px solid #dbdbdb;
+      border-radius: 8px;
+      overflow: hidden;
+      
+      input {
+        flex: 1;
+        padding: 0.8rem;
+        border: none;
+        font-size: 0.85rem;
+        background: #fafafa;
+        
+        &:focus {
+          outline: none;
+          background: #fff;
+        }
+      }
+      
+      .copy-btn {
+        padding: 0 1rem;
+        background: #f8f9fa;
+        border: none;
+        border-left: 1px solid #dbdbdb;
+        font-weight: 600;
+        color: #0095f6;
+        cursor: pointer;
+        transition: all 0.2s;
+        
+        &:hover {
+          background: #e9f5fe;
+        }
+        
+        &.copied {
+          background: #e1f7e8;
+          color: #1a9e3f;
+        }
+      }
+    }
+  }
+
+  // Botones de acción
+  .modal-actions {
+    padding: 0 1rem 1rem;
+    display: flex;
+    justify-content: center;
+    
+    .close-btn {
+      padding: 0.6rem 1.5rem;
+      background: #0095f6;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      
+      &:hover {
+        background: #007acc;
+      }
+    }
+  }
+}
+
+// =============================================
+// ANIMACIONES
+// =============================================
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+// =============================================
+// RESPONSIVE - TABLET (768px)
+// =============================================
+@media (min-width: 768px) {
+  .share-modal {
+    .modal-header {
+      padding: 1.2rem;
+      
+      h3 {
+        font-size: 1.2rem;
+      }
+    }
+    
+    .share-url-container {
+      padding: 1.8rem 1.2rem;
+      
+      .share-instruction {
+        font-size: 1rem;
+      }
+      
+      .share-url {
+        input {
+          font-size: 0.9rem;
+        }
+      }
+    }
+    
+    .modal-actions {
+      padding: 0 1.2rem 1.2rem;
+      
+      .close-btn {
+        padding: 0.7rem 1.8rem;
+      }
+    }
+  }
+}
+
+// =============================================
+// RESPONSIVE - ESCRITORIO (1024px)
+// =============================================
+@media (min-width: 1024px) {
+  .share-modal {
+    max-width: 500px;
+    
+    .modal-header {
+      padding: 1.5rem;
+    }
+    
+    .share-url-container {
+      padding: 2rem 1.5rem;
+    }
+  }
+}

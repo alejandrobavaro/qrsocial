@@ -1,308 +1,226 @@
 # Documentación Completa de QR Social
+Estoy trabajando en mi pagina llamada qr social. es una pagina que permite a los invitados de un evento (en este caso una boda) tener una red social privada para documentar todo el evento. la idea es que la gente suba sus imagenes y videos y posteos y lo que quieran compartir y todo se aloje en una base de datos y luego los organizadores del evento (en este caso de la boda, serian los novios) podran bajar todo el archivo de las imagenes del dia de su casamiento. Debe tener una interfaz amigable y muy similar a instagram para que los usuario ya lo tengan conocido y no sea algo complicado de aprender, sino que sea algo que ya conocen y simplemente pueden usar para ese dia pero de manera "privada" ya que es una red social cerrada y privada para la lista de invitados. la idea es que cada invitado tenga un qr en la boda impreso y de esa manera pueden ingresar a la red social y libremente compartir lo que quieran ya logueados. 
+# Documentación Completa de QR Social - README
+
+## Tabla de Contenidos
+1. [Introducción](#1-introducción)
+2. [Características Principales](#2-características-principales)
+3. [Guía de Usuario](#3-guía-de-usuario)
+4. [Estructura del Proyecto](#4-estructura-del-proyecto)
+5. [Componentes Clave](#5-componentes-clave)
+6. [Estilos y Diseño](#6-estilos-y-diseño)
+7. [Configuración Técnica](#7-configuración-técnica)
+8. [Seguridad](#8-seguridad)
+9. [Roadmap](#9-roadmap)
 
 ## 1. Introducción
+QR Social es una red social privada para eventos, diseñada específicamente para bodas. Permite a los invitados compartir fotos, videos y mensajes en un entorno cerrado, similar a Instagram pero exclusivo para los asistentes al evento.
 
-**QR Social** es una red social privada para eventos, donde los invitados pueden:
-- Acceder mediante QR o credenciales simples
-- Compartir fotos, videos y mensajes
-- Interactuar con otros asistentes
-- Los organizadores tienen un panel de administración completo
+**Propósito Principal**: Crear un archivo digital colaborativo del evento que los organizadores (novios) puedan descargar posteriormente.
 
-## 2. Flujo de Usuario
+## 2. Características Principales
+- **Acceso mediante QR**: Cada invitado recibe un código QR único
+- **Interfaz familiar**: Diseño inspirado en Instagram para fácil adopción
+- **Contenido privado**: Solo visible para los invitados confirmados
+- **Panel de administración**: Para gestión de invitados y contenido
+- **Exportación de datos**: Descarga completa de todas las publicaciones
 
-### 2.1. Acceso al Sistema
-1. **Pantalla de Login**: `/login`
-   - Opción de escanear QR
-   - Opción de ingresar como invitado
-2. **Feed Principal**: `/feed`
-   - Vista de todas las publicaciones
-   - Formulario para crear nuevos posts
-3. **Perfil**: `/profile/:id`
-   - Publicaciones del usuario
-   - Información básica
+## 3. Guía de Usuario
 
-### 2.2. Panel de Administración
-1. **Dashboard**: `/admin`
-   - Estadísticas del evento
-2. **Gestión de Invitados**: `/admin/guests`
-   - Listado y confirmación
-3. **Gestión de Contenido**: `/admin/content`
-   - Moderación de publicaciones
-4. **Exportación de Datos**: `/admin/export`
-   - Descarga de toda la información
+### 3.1 Para Invitados
+1. **Acceso al sistema**:
+   - Escanear QR en la mesa de recepción
+   - Opción manual ingresando nombre completo
 
-## 3. Documentación de Componentes
+2. **Interfaz principal**:
+   - Feed de publicaciones similar a Instagram
+   - Botón "+" para crear nuevas publicaciones
+   - Historias temporales (24 horas)
 
-### 3.1. Componentes Principales
+3. **Perfil personal**:
+   - Ver todas tus publicaciones
+   - Editar biografía breve
+   - Ver relación con los novios
 
-#### App.jsx
-```markdown
-**Propósito**: Componente raíz que configura el enrutamiento principal  
-**Rutas**:
-- Públicas: `/login`, `/feed`, `/profile/:id`
-- Administración: `/admin/*` (protegidas)
-**Dependencias**:
-- AuthProvider: Contexto de autenticación
-- React Router: Manejo de rutas
+### 3.2 Para Organizadores (Admin)
+1. **Panel de control**:
+   - Ver estadísticas de participación
+   - Gestionar lista de invitados
+   - Moderar contenido
+
+2. **Exportación de datos**:
+   - Descargar todas las fotos/videos
+   - Opción de crear álbum digital
+
+## 4. Estructura del Proyecto
+
+### 4.1 Arquitectura de Componentes
+```
+src/
+├── componentes/
+│   ├── auth/            # Componentes de autenticación
+│   ├── user/            # Vistas de usuario regular
+│   ├── admin/           # Panel de administración
+│   └── shared/          # Componentes reutilizables
+├── context/             # Gestión de estado global
+├── assets/
+│   ├── scss/            # Estilos organizados por componentes
+│   └── img/             # Recursos visuales
+└── utils/               # Funciones auxiliares
 ```
 
-#### AuthContext.jsx
-```markdown
-**Propósito**: Gestiona el estado global de autenticación  
-**Funcionalidades**:
-- `loginWithQR`: Autentica con código QR
-- `loginAsGuest`: Autentica como invitado
-- `logout`: Cierra sesión
-- `currentUser`: Datos del usuario actual
-**Almacenamiento**: Guarda estado en localStorage
-```
-
-#### MainLayout.jsx
-```markdown
-**Propósito**: Layout principal de la aplicación  
-**Estructura**:
-- Header
-- Contenido principal
-- Footer
-**Responsive**: Adapta disposición en móvil/desktop
-```
-
-### 3.2. Componentes de Autenticación
-
-#### LoginPage.jsx
-```markdown
-**Propósito**: Pantalla de acceso al sistema  
-**Componentes incluidos**:
-- QrLogin.jsx: Lector de códigos QR
-- GuestLogin.jsx: Formulario para invitados
-**Flujo**:
-- Redirige a /feed al autenticar correctamente
-```
-
-#### QrLogin.jsx
-```markdown
-**Propósito**: Componente de escaneo QR  
-**Tecnología**: Usa react-qr-reader
-**Eventos**:
-- Escaneo exitoso: llama a loginWithQR
-- Error: muestra mensaje al usuario
-```
-
-### 3.3. Componentes del Feed
-
-#### FeedPage.jsx
-```markdown
-**Propósito**: Muestra el timeline de publicaciones  
-**Funcionalidades**:
-- Carga posts desde Firebase
-- Filtrado por tipo (todos/mis posts)
-- Integra PostForm para nuevas publicaciones
-**Optimización**: Virtualización con react-window
-```
-
-#### Post.jsx
-```markdown
-**Propósito**: Muestra una publicación individual  
-**Interacciones**:
-- Like/Reacciones
-- Comentarios
-- Compartir
-**Accesibilidad**: Roles ARIA y etiquetas semánticas
-```
-
-#### PostForm.jsx
-```markdown
-**Propósito**: Formulario para crear publicaciones  
-**Capacidades**:
-- Texto
-- Subida de imágenes
-- Preview de contenido
-**Validaciones**: Campos requeridos
-```
-
-### 3.4. Componentes de Administración
-
-#### AdminLayout.jsx
-```markdown
-**Propósito**: Layout del panel de administración  
-**Protección**: Solo accesible para rol 'admin'
-**Estructura**:
-- Sidebar de navegación
-- Área de contenido principal
-```
-
-#### GuestManager.jsx
-```markdown
-**Propósito**: Gestión de lista de invitados  
-**Funcionalidades**:
-- Búsqueda/filtrado
-- Confirmación de asistencia
-- Paginación
-**Conexiones**: Firebase Realtime Database
-```
-
-#### DataExporter.jsx
-```markdown
-**Propósito**: Exportación de datos del evento  
-**Formatos soportados**:
-- JSON (completo o por secciones)
-**Tecnología**: Usa file-saver para descargas
-```
-
-### 3.5. Componentes Auxiliares
-
-#### Header.jsx
-```markdown
-**Propósito**: Barra de navegación superior  
-**Contenido dinámico**:
-- Muestra opciones según rol (invitado/admin)
-- Iconos de navegación principal
-**Responsive**: Colapsa en móvil
-```
-
-#### Stories.jsx
-```markdown
-**Propósito**: Muestra historias temporales (24h)  
-**Características**:
-- Reproductor con progreso
-- Navegación entre historias
-- Marca como vistas al visualizar
-```
-
-## 4. Estructura de Estilos
-
-### 4.1. Arquitectura SCSS
-```
-src/assets/scss/
-├── _01-General/        # Estilos globales
-│   └── _App.scss       # Estructura base
-└── _03-Componentes/    # Estilos por componente
-    ├── _Header.scss
-    ├── _FeedPage.scss
-    └── _Post.scss      # etc...
-```
-
-### 4.2. Convenciones
-- **Mobile-first**: Todos los estilos comienzan por móvil
-- **Breakpoints**:
-  - Tablet: `@media (min-width: 768px)`
-  - Desktop: `@media (min-width: 1024px)`
-- **Clases**: Nombres descriptivos y consistentes
-
-## 5. Diagrama de Flujo
-
+### 4.2 Flujo de la Aplicación
 ```mermaid
 graph TD
-    A[Inicio] --> B{Autenticado?}
-    B -->|No| C[Login]
+    A[Inicio] --> B{¿Autenticado?}
+    B -->|No| C[Login QR/Manual]
     B -->|Sí| D[Feed Principal]
-    C --> D
-    D --> E[Crear Post]
+    D --> E[Crear Publicación]
     D --> F[Ver Perfil]
     D --> G[Ver Comentarios]
-    H[Admin] --> I[Gestión Invitados]
+    H[Admin] --> I[Gestión de Invitados]
     H --> J[Moderar Contenido]
     H --> K[Exportar Datos]
 ```
 
-## 6. Guía de Estilos Visuales
+## 5. Componentes Clave
 
-### 6.1. Paleta de Colores
-- **Primario**: `#3498db` (Azul)
-- **Secundario**: `#2ecc71` (Verde)
-- **Acento**: `#e74c3c` (Rojo)
-- **Fondos**: `#f8f9fa` (Gris claro)
+### 5.1 App.jsx
+**Propósito**: Componente raíz que configura:
+- Enrutamiento principal
+- Provee contexto de autenticación
+- Define estructura base del layout
 
-### 6.2. Tipografía
-- **Principal**: 'Poppins', sans-serif
-- **Secundaria**: 'Montserrat', sans-serif
-- **Tamaños**:
-  - Móvil: 14px base
-  - Desktop: 16px base
+**Estructura**:
+```javascript
+<Router>
+  <AuthProvider>
+    <MainLayout>
+      <Routes>
+        {/* Rutas públicas */}
+        <Route path="/login" element={<LoginPage />} />
+        
+        {/* Rutas protegidas */}
+        <Route path="/feed" element={<FeedPage />} />
+        
+        {/* Rutas de admin */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="guests" element={<GuestManager />} />
+        </Route>
+      </Routes>
+    </MainLayout>
+  </AuthProvider>
+</Router>
+```
+
+### 5.2 AuthContext.jsx
+**Funcionalidades**:
+- `loginWithQR`: Autenticación mediante código QR
+- `loginAsGuest`: Acceso manual para invitados
+- `logout`: Cierra sesión
+- `currentUser`: Datos del usuario actual
+
+### 5.3 LoginPage.jsx
+**Flujo de acceso**:
+1. Pantalla de bienvenida con dos opciones:
+   - Escanear QR (componente QrLogin)
+   - Acceso manual (formulario simple)
+
+2. En desarrollo: Acceso rápido con usuario demo
+
+### 5.4 FeedPage.jsx
+**Características**:
+- Muestra timeline de publicaciones
+- Integra componente Stories
+- Formulario para nuevos posts
+- Diseño responsive mobile-first
+
+## 6. Estilos y Diseño
+
+### 6.1 Principios de Diseño
+- **Mobile-first**: Todos los estilos comienzan por móvil
+- **Breakpoints**:
+  - Tablet: `@media (min-width: 768px)`
+  - Desktop: `@media (min-width: 1024px)`
+- **Consistencia visual**: Mantener patrón similar a Instagram
+
+### 6.2 Estructura SCSS
+```scss
+// Ejemplo de estructura modular
+.instagram-header {
+  // Estilos base para móvil
+  @media (min-width: 768px) {
+    // Ajustes tablet
+  }
+  @media (min-width: 1024px) {
+    // Ajustes desktop
+  }
+}
+```
 
 ## 7. Configuración Técnica
 
-### 7.1. Dependencias Clave
-```markdown
-- React 18
-- React Router 6
-- Firebase (Firestore, Storage)
-- react-icons
-- moment.js (manejo de fechas)
-- file-saver (exportación)
+### 7.1 Dependencias Clave
+```json
+"dependencies": {
+  "react": "^18.2.0",
+  "react-router-dom": "^6.14.2",
+  "firebase": "^9.22.0",
+  "react-icons": "^4.8.0",
+  "jsqr": "^1.4.0"
+}
 ```
 
-### 7.2. Estructura de Firebase
+### 7.2 Estructura de Datos en Firebase
 ```javascript
 {
   "events": {
     "eventId": {
-      "name": "Boda de Ale y Fabi",
+      "name": "Nombre del Evento",
       "date": "2023-12-15"
     }
   },
   "guests": {
     "guestId": {
-      "name": "Invitado Ejemplo",
-      "eventId": "eventId",
+      "name": "Nombre Invitado",
+      "qrCode": "hash-unico",
       "confirmed": true
     }
   },
   "posts": {
     "postId": {
       "userId": "guestId",
-      "text": "Contenido del post",
-      "image": "url/imagen.jpg",
-      "likes": ["userId1", "userId2"],
-      "comments": {
-        "commentId": {
-          "userId": "userId",
-          "text": "Texto del comentario"
-        }
-      }
+      "imageUrl": "url/imagen.jpg",
+      "likes": ["userId1", "userId2"]
     }
   }
 }
 ```
 
-## 8. Manual de Uso
+## 8. Seguridad
+- **Autenticación**: 
+  - Códigos QR con hash único
+  - Validación manual contra lista de invitados
+- **Permisos**:
+  - Usuarios solo pueden editar su propio contenido
+  - Panel admin protegido por rol
+- **Firebase Rules**:
+  - Lectura limitada a invitados confirmados
+  - Escritura validada por UID
 
-### 8.1. Para Invitados
-1. Escanear QR o ingresar nombre
-2. Navegar por el feed de publicaciones
-3. Crear nuevos posts con fotos/texto
-4. Interactuar con otros contenidos
-
-### 8.2. Para Administradores
-1. Acceder a `/admin` con credenciales
-2. Gestionar lista de invitados
-3. Moderar contenido inapropiado
-4. Exportar datos post-evento
-
-## 9. Consideraciones de Seguridad
-
-```markdown
-1. Autenticación:
-   - QR con hash único
-   - Credenciales básicas para invitados
-   
-2. Permisos:
-   - Usuarios regulares solo pueden editar su contenido
-   - Panel admin protegido por rol
-
-3. Firebase Rules:
-   - Lectura abierta para contenido público
-   - Escritura validada por UID
-```
-
-## 10. Roadmap y Mejoras Futuras
-
-```markdown
+## 9. Roadmap
 - [ ] Notificaciones en tiempo real
-- [ ] Búsqueda avanzada de contenido
 - [ ] Filtros para fotos/videos
-- [ ] Integración con redes sociales
-- [ ] Analytics avanzado para organizadores
-```
+- [ ] Integración con servicios de álbumes fotográficos
+- [ ] Mejoras en accesibilidad
+- [ ] Analytics para organizadores
 
-# qrsocial
+## Guía de Contribución
+1. Clonar repositorio
+2. Instalar dependencias: `npm install`
+3. Configurar variables de entorno Firebase
+4. Ejecutar en desarrollo: `npm start`
+5. Seguir convenciones de código existentes
+
+## Licencia
+MIT License - Uso libre para fines no comerciales

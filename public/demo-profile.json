@@ -1,12 +1,112 @@
 {
-  "id": 101,
-  "name": "María González",
-  "username": "maria_g",
-  "avatar": "/img/users/maria.jpg",
-  "bio": "Próxima a casarme con el amor de mi vida ❤️ 15.07.2023",
-  "relation": "Novia",
-  "followers": 86,
-  "following": 64,
-  "isFollowing": true,
-  "posts": 12
+  "profiles": [
+    {
+      "id": 1,
+      "nombre": "Alejandro",
+      "apellido": "Bavaro",
+      "relacion": "Novio",
+      "imagen": "/img/09-perfiles/alejandro.jpg",
+      "bio": "¡Emocionado por nuestra boda! ❤️",
+      "posts": [
+        {
+          "id": 101,
+          "imageUrl": "alejandro-1.jpg",
+          "caption": "Preparando todo para el gran día",
+          "likes": 24,
+          "comments": [
+            {
+              "user": "Fabiola Lutrario",
+              "text": "¡Te quiero mucho!"
+            }
+          ],
+          "timestamp": "2023-10-15T14:30:00Z"
+        },
+        {
+          "id": 102,
+          "imageUrl": "alejandro-2.jpg",
+          "caption": "Probando el traje para la boda",
+          "likes": 32,
+          "comments": [],
+          "timestamp": "2023-10-10T11:15:00Z"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Fabiola",
+      "apellido": "Lutrario",
+      "relacion": "Novia",
+      "imagen": "/img/09-perfiles/fabiola.jpg",
+      "bio": "Soñando con nuestro día especial ✨",
+      "posts": [
+        {
+          "id": 201,
+          "imageUrl": "fabiola-1.jpg",
+          "caption": "Finalmente encontré el vestido perfecto",
+          "likes": 45,
+          "comments": [
+            {
+              "user": "Alejandro Bavaro",
+              "text": "Estoy seguro que te ves hermosa ❤️"
+            }
+          ],
+          "timestamp": "2023-10-12T16:45:00Z"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Invitado",
+      "apellido": "Demo",
+      "relacion": "Mejor Amigo",
+      "imagen": "/img/09-perfiles/feli.jpg",
+      "bio": "¡No puedo esperar para celebrar con ustedes!",
+      "posts": [
+        {
+          "id": 301,
+          "imageUrl": "demo-1.jpg",
+          "caption": "Recordando los buenos momentos",
+          "likes": 12,
+          "comments": [],
+          "timestamp": "2023-10-05T09:20:00Z"
+        },
+        {
+          "id": 302,
+          "imageUrl": "demo-2.jpg",
+          "caption": "El lugar de la boda es increíble",
+          "likes": 18,
+          "comments": [
+            {
+              "user": "Alejandro Bavaro",
+              "text": "Gracias por venir!"
+            }
+          ],
+          "timestamp": "2023-10-08T13:10:00Z"
+        }
+      ]
+    }
+  ],
+  "defaultPosts": [
+    {
+      "id": 1001,
+      "imageUrl": "default-1.jpg",
+      "caption": "Un momento especial del evento",
+      "likes": 8,
+      "comments": [],
+      "timestamp": "2023-10-01T10:00:00Z"
+    },
+    {
+      "id": 1002,
+      "imageUrl": "default-2.jpg",
+      "caption": "Celebrando el amor",
+      "likes": 15,
+      "comments": [
+        {
+          "user": "Novios",
+          "text": "Gracias por compartir este momento"
+        }
+      ],
+      "timestamp": "2023-10-01T12:30:00Z"
+    }
+  ]
 }

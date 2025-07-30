@@ -1,231 +1,192 @@
 // =============================================
-// COMPONENTE LOGIN PAGE - Versión Completa
+// COMPONENTE: LoginPage - Versión Mejorada
 // =============================================
-
 /**
- * PROPÓSITO PRINCIPAL:
- * - Página de autenticación para usuarios
- * - Ofrece dos métodos de acceso: QR y manual
- * - Incluye accesos rápidos para desarrollo
- * - Estilo visual consistente con Instagram
- * - 100% responsive (mobile-first)
+ * PROPÓSITO:
+ * - Manejar autenticación mediante QR o acceso manual
+ * - Validar usuarios contra lista de invitados.json
+ * - Proporcionar acceso demo en desarrollo
+ * 
+ * COMUNICACIÓN:
+ * - AuthContext: Para funciones de autenticación
+ * - QrLogin: Componente hijo para escaneo QR
+ * - React Router: Para navegación
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import QrLogin from './auth/QrLogin';
+import { BsQrCode, BsPeople } from 'react-icons/bs';
+import Swal from 'sweetalert2';
 import '../assets/scss/_03-Componentes/_LoginPage.scss';
 
 const LoginPage = () => {
-  // ============ 1. HOOKS Y ESTADOS ============
-  // Contexto de autenticación
-  const { loginAsGuest } = useAuth();
+  // ============ SECCIÓN 1: ESTADOS Y CONTEXTO ============
+  const { currentUser, loginAsGuest } = useAuth();
+  const navigate = useNavigate();
   
   // Estados del componente
-  const [showQrLogin, setShowQrLogin] = useState(true); // Controla qué formulario mostrar
-  const [guestName, setGuestName] = useState(''); // Almacena nombre de invitado
-  const [error, setError] = useState(null); // Maneja mensajes de error
-  const [isLoading, setIsLoading] = useState(false); // Estado de carga
+  const [showQrLogin, setShowQrLogin] = useState(true);
+  const [guestName, setGuestName] = useState('');
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // ============ 2. MANEJADORES PRINCIPALES ============
+  // ============ SECCIÓN 2: EFECTOS ============
+  // Redirige si el usuario ya está autenticado
+  useEffect(() => {
+    if (currentUser) {
+      Swal.fire({
+        title: `¡Bienvenido a QR Social, ${currentUser.name}!`,
+        text: 'Ya estás logueado correctamente',
+        icon: 'success',
+        confirmButtonText: 'Continuar',
+        timer: 3000,
+        timerProgressBar: true,
+        didClose: () => navigate('/feed')
+      });
+    }
+  }, [currentUser, navigate]);
 
-  /**
-   * 2.1 handleQuickAccess - Acceso rápido para desarrollo
-   * @param {string} role - Tipo de usuario (admin/guest/super)
-   * Crea un usuario demo y lo autentica
-   */
-  const handleQuickAccess = (role) => {
-    const demoUsers = {
-      admin: {
-        id: 'dev-admin-001',
-        name: 'Admin Demo',
-        lastName: '',
-        image: '/img/default-avatar.png',
-        role: 'admin',
-        relation: 'Organizador'
-      },
-      guest: {
-        id: 'dev-guest-001',
-        name: 'Invitado Demo',
-        lastName: '',
-        image: '/img/default-avatar.png',
-        role: 'guest',
-        relation: 'Invitado'
-      },
-      super: {
-        id: 'dev-super-001',
-        name: 'Modo Dios',
-        lastName: '',
-        image: '/img/default-avatar.png',
-        role: 'super_admin',
-        relation: 'Desarrollador'
-      }
+  // ============ SECCIÓN 3: MANEJADORES ============
+  // Acceso demo para desarrollo
+  const handleQuickAccess = () => {
+    const demoUser = {
+      id: 'dev-guest-001',
+      name: 'Invitado Demo',
+      lastName: '',
+      avatar: '/img/09-perfiles/feli.jpg',
+      role: 'guest',
+      relation: 'Invitado',
+      bio: 'Usuario de demostración'
     };
-    loginAsGuest(demoUsers[role]);
+    loginAsGuest(demoUser);
   };
 
-  /**
-   * 2.2 handleGuestLogin - Autenticación manual
-   * @param {Event} e - Evento del formulario
-   * Valida y autentica al invitado manualmente
-   */
+  // Autenticación manual
   const handleGuestLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
 
     try {
-      // 2.2.1 Validación básica
+      // Validación básica
       if (!guestName.trim()) {
         setError("Por favor ingresa tu nombre completo");
         return;
       }
 
-      // 2.2.2 Simulación de verificación (en desarrollo)
-      if (process.env.NODE_ENV === 'development') {
-        const userData = {
-          id: `temp-${Date.now()}`,
-          name: guestName.trim(),
-          lastName: '',
-          image: '/img/default-avatar.png',
-          role: 'guest',
-          relation: 'Invitado Manual'
-        };
-        loginAsGuest(userData);
+      // Modo desarrollo - acceso demo
+      if (process.env.NODE_ENV === 'development' && guestName.trim().toLowerCase() === "invitado demo") {
+        handleQuickAccess();
         return;
       }
 
-      // 2.2.3 Lógica de producción (verificación real)
+      // Buscar en invitados.json
       const response = await fetch('/invitados.json');
       const data = await response.json();
       
-      let guest = null;
-      for (const group of data.grupos) {
-        guest = group.invitados.find(inv => 
-          `${inv.nombre} ${inv.apellido}`.toLowerCase() === guestName.trim().toLowerCase()
-        );
-        if (guest) break;
-      }
-
-      if (!guest && guestName.trim().toLowerCase() === "invitado prueba") {
-        guest = data.config?.acceso_prueba?.usuario_prueba;
-      }
+      // Buscar coincidencia exacta de nombre y apellido
+      const guest = data.grupos.flatMap(g => g.invitados).find(inv => {
+        const nombreCompleto = `${inv.nombre} ${inv.apellido}`.toLowerCase().trim();
+        return nombreCompleto === guestName.toLowerCase().trim();
+      });
 
       if (guest) {
-        const userData = {
+        loginAsGuest({
           id: guest.id,
           name: guest.nombre,
           lastName: guest.apellido,
-          image: guest.imagen || '/img/default-avatar.png',
-          role: guest.role || 'guest',
-          relation: guest.relacion || 'Invitado'
-        };
-        loginAsGuest(userData);
+          avatar: guest.imagen || '/img/default-avatar.png',
+          role: 'guest',
+          relation: guest.relacion || 'Invitado',
+          bio: guest.bio || ''
+        });
       } else {
-        setError("Invitado no encontrado. Verifica tu nombre.");
+        setError("Invitado no encontrado. Verifica que escribiste tu nombre completo exactamente como aparece en la invitación.");
       }
     } catch (err) {
-      console.error("Error en autenticación:", err);
-      setError("Error al verificar. Intenta nuevamente.");
+      console.error("Error al verificar invitado:", err);
+      setError("Ocurrió un error al verificar. Por favor intenta nuevamente.");
     } finally {
       setIsLoading(false);
     }
   };
 
-  // ============ 3. RENDERIZADO ============
+  // ============ SECCIÓN 4: RENDERIZADO ============
+  if (currentUser) {
+    return (
+      <div className="loading-session">
+        <p>Redirigiendo a tu sesión...</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="instagram-login">
-      {/* 3.1 Contenedor Principal */}
+    <div className="login-page">
       <div className="login-container">
-        
-        {/* 3.2 Encabezado con Logo */}
+        {/* Encabezado con logo */}
         <div className="login-header">
-          <h1 className="app-logo">QR Social</h1>
-          {process.env.NODE_ENV === 'development' && (
-            <span className="dev-badge">MODO DESARROLLO</span>
-          )}
+          <img src="/img/02-logos/logoqrsocial11a.png" alt="QR Social" className="logo" />
+          <p className="subtitle">Red social privada para tu evento</p>
         </div>
 
-        {/* 3.3 Selector de Método de Autenticación */}
-        <div className="auth-method-selector">
-          <button
-            className={`method-tab ${showQrLogin ? 'active' : ''}`}
+        {/* Selector de método de acceso */}
+        <div className="method-selector">
+          <button 
+            className={`tab ${showQrLogin ? 'active' : ''}`}
             onClick={() => setShowQrLogin(true)}
           >
-            Escanear QR
+            <BsQrCode /> QR
           </button>
-          <button
-            className={`method-tab ${!showQrLogin ? 'active' : ''}`}
+          <button 
+            className={`tab ${!showQrLogin ? 'active' : ''}`}
             onClick={() => setShowQrLogin(false)}
           >
-            Acceso Manual
+            <BsPeople /> Manual
           </button>
         </div>
 
-        {/* 3.4 Contenido Dinámico según Método */}
+        {/* Contenido dinámico según método seleccionado */}
         <div className="auth-content">
           {showQrLogin ? (
-            // 3.4.1 Componente QR Login
-            <div className="qr-auth">
-              <QrLogin />
-              <p className="auth-instruction">
-                Escanea el código QR de tu invitación
-              </p>
-            </div>
+            <QrLogin onSwitchToGuest={() => setShowQrLogin(false)} />
           ) : (
-            // 3.4.2 Formulario Manual
-            <form onSubmit={handleGuestLogin} className="manual-auth">
+            <form onSubmit={handleGuestLogin} className="guest-form">
               <input
                 type="text"
                 value={guestName}
                 onChange={(e) => setGuestName(e.target.value)}
-                placeholder="Nombre completo como en la invitación"
-                className="auth-input"
-                required
+                placeholder="Ej: Juan Pérez"
+                className="name-input"
+                aria-label="Ingresa tu nombre completo"
               />
               <button 
                 type="submit" 
-                className="auth-button"
+                className="submit-btn" 
                 disabled={isLoading}
+                aria-label="Ingresar a la aplicación"
               >
                 {isLoading ? 'Verificando...' : 'Ingresar'}
               </button>
-              {error && <p className="error-message">{error}</p>}
+              {error && <p className="error-msg">{error}</p>}
+              <p className="login-hint">Ingresa tu nombre y apellido exactamente como aparece en tu invitación</p>
             </form>
           )}
         </div>
 
-        {/* 3.5 Sección de Desarrollo (solo en dev) */}
+        {/* Sección de desarrollo (solo visible en dev) */}
         {process.env.NODE_ENV === 'development' && (
-          <div className="dev-access-section">
-            <h3 className="dev-section-title">Accesos Rápidos</h3>
-            <div className="dev-buttons">
-              <button 
-                onClick={() => handleQuickAccess('guest')} 
-                className="dev-button guest"
-              >
-                Invitado Demo
-              </button>
-              <button 
-                onClick={() => handleQuickAccess('admin')} 
-                className="dev-button admin"
-              >
-                Admin Demo
-              </button>
-              <button 
-                onClick={() => handleQuickAccess('super')} 
-                className="dev-button super"
-              >
-                Modo Dios
-              </button>
-            </div>
+          <div className="dev-options">
+            <button 
+              onClick={handleQuickAccess} 
+              className="demo-btn"
+              aria-label="Acceso rápido para desarrollo"
+            >
+              Acceso Demo
+            </button>
           </div>
         )}
-      </div>
-
-      {/* 3.6 Pie de Página */}
-      <div className="login-footer">
-        <p>Sistema exclusivo para invitados del evento</p>
       </div>
     </div>
   );

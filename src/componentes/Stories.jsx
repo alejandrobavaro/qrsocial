@@ -3,36 +3,37 @@
 // =============================================
 
 /**
- * Propósito:
- * - Mostrar historias de usuarios en formato circular (similar a Instagram)
- * - Permitir ver historias con un click
- * - Mostrar estado visto/no visto con borde de color
- * 
- * Integraciones:
- * - AuthContext: Para datos del usuario actual
- * - StoriesCarousel: Para visualización completa de stories
- * - demo-stories.json: Datos de ejemplo para las stories
+ * SECCIÓN 1: IMPORTS Y CONFIGURACIÓN INICIAL
+ * - useAuth: Para obtener usuario actual
+ * - StoriesCarousel: Componente para visualización ampliada
+ * - SCSS: Estilos específicos del componente
  */
-
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import StoriesCarousel from './StoriesCarousel';
 import '../assets/scss/_03-Componentes/_Stories.scss';
 
 const Stories = ({ userId }) => {
-  // Estados del componente
-  const [stories, setStories] = useState([]); // Almacena las stories cargadas
-  const [selectedStory, setSelectedStory] = useState(null); // Story seleccionada para ver
-  const [viewedStories, setViewedStories] = useState([]); // IDs de stories ya vistas
+  /**
+   * SECCIÓN 2: ESTADOS DEL COMPONENTE
+   * - stories: Listado de stories disponibles
+   * - selectedStory: Story seleccionada para ver en detalle
+   * - viewedStories: IDs de stories ya vistas por el usuario
+   */
+  const [stories, setStories] = useState([]);
+  const [selectedStory, setSelectedStory] = useState(null);
+  const [viewedStories, setViewedStories] = useState([]);
 
-  // Obtenemos el usuario actual del contexto de autenticación
+  // Obtenemos usuario actual del contexto
   const { currentUser } = useAuth();
 
-  // Efecto para cargar las stories de ejemplo al montar el componente
+  /**
+   * SECCIÓN 3: EFECTOS
+   * - Carga inicial de stories desde demo-stories.json
+   */
   useEffect(() => {
     const loadStories = async () => {
       try {
-        // Cargamos las stories desde el archivo JSON demo
         const response = await fetch('/demo-stories.json');
         const data = await response.json();
         setStories(data);
@@ -45,57 +46,64 @@ const Stories = ({ userId }) => {
   }, []);
 
   /**
-   * Maneja la apertura de una story
-   * @param {Object} story - Story seleccionada
+   * SECCIÓN 4: MANEJADORES DE EVENTOS
+   * - handleStoryOpen: Abre una story en el carrusel
+   * - handleCloseCarousel: Cierra el carrusel
    */
   const handleStoryOpen = (story) => {
-    setSelectedStory(story); // Establece la story seleccionada
-    // Marca como vista si no lo estaba
+    setSelectedStory(story);
     if (!viewedStories.includes(story.id)) {
       setViewedStories([...viewedStories, story.id]);
     }
   };
 
-  // Cierra el carrusel de stories
   const handleCloseCarousel = () => {
     setSelectedStory(null);
   };
 
+  /**
+   * SECCIÓN 5: RENDERIZADO
+   * - Contenedor principal de stories
+   * - Story del usuario actual (para crear nueva)
+   * - Listado de stories de otros usuarios
+   * - Carrusel (solo cuando hay story seleccionada)
+   */
   return (
-    <div className="stories-container">
-      {/* Story del usuario actual (para crear nueva) */}
-      <div className="story-item current-user">
-        <div className="story-avatar-wrapper">
-          <img 
-            src={currentUser?.image || '/img/default-avatar.png'} 
-            alt="Tu historia" 
-            className="story-avatar"
-          />
-          {/* Botón para añadir nueva story */}
-          <button className="add-story-btn">+</button>
-        </div>
-        <span className="story-username">Tu historia</span>
-      </div>
-
-      {/* Listado de stories de otros usuarios */}
-      {stories.map(story => (
-        <div 
-          key={story.id} 
-          className={`story-item ${viewedStories.includes(story.id) ? 'viewed' : ''}`}
-          onClick={() => handleStoryOpen(story)}
-        >
+    <div className="stories-wrapper">
+      <div className="stories-container">
+        {/* Story del usuario actual */}
+        <div className="story-item current-user">
           <div className="story-avatar-wrapper">
             <img 
-              src={story.user.avatar} 
-              alt={story.user.name} 
+              src={currentUser?.avatar || '/img/default-avatar.png'} 
+              alt="Tu historia" 
               className="story-avatar"
             />
+            <button className="add-story-btn">+</button>
           </div>
-          <span className="story-username">{story.user.name}</span>
+          <span className="story-username">Tu historia</span>
         </div>
-      ))}
 
-      {/* Carrusel para ver story seleccionado (se muestra solo cuando hay una story seleccionada) */}
+        {/* Stories de otros usuarios */}
+        {stories.map(story => (
+          <div 
+            key={story.id} 
+            className={`story-item ${viewedStories.includes(story.id) ? 'viewed' : ''}`}
+            onClick={() => handleStoryOpen(story)}
+          >
+            <div className="story-avatar-wrapper">
+              <img 
+                src={story.user.avatar} 
+                alt={story.user.name} 
+                className="story-avatar"
+              />
+            </div>
+            <span className="story-username">{story.user.name}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Carrusel para story seleccionada */}
       {selectedStory && (
         <StoriesCarousel 
           story={selectedStory} 

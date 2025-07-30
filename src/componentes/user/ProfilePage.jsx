@@ -1,55 +1,111 @@
 // =============================================
-// PÁGINA DE PERFIL - ProfilePage
+// PÁGINA DE PERFIL - Versión con Datos Demo
 // =============================================
 
 /**
- * Propósito:
- * - Mostrar perfil completo del usuario con diseño similar a Instagram
- * - Mostrar galería de publicaciones en grid
- * - Permitir edición básica de la biografía
- * - Mostrar relación con los novios (específico para boda)
- * 
- * Integraciones:
- * - AuthContext: Para datos del usuario actual
- * - React Router: Para manejo de parámetros y navegación
- * - Post: Componente de publicaciones (no usado directamente aquí pero relacionado)
- * - Fetch API: Para cargar datos demo del perfil y publicaciones
+ * SECCIÓN 1: IMPORTS Y CONFIGURACIÓN
+ * - useParams: Obtiene parámetros de URL (username)
+ * - useAuth: Acceso a datos de autenticación
+ * - Link: Para navegación interna
+ * - SCSS: Estilos del componente
  */
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import '../../assets/scss/_03-Componentes/_ProfilePage.scss';
 
 const ProfilePage = () => {
-  // Estados del componente
-  const { username } = useParams(); // Obtiene el username de la URL
-  const { currentUser } = useAuth(); // Usuario actual desde el contexto
-  const [profileUser, setProfileUser] = useState(null); // Datos del perfil mostrado
-  const [userPosts, setUserPosts] = useState([]); // Publicaciones del usuario
-  const [isLoading, setIsLoading] = useState(true); // Estado de carga
-  const [isEditing, setIsEditing] = useState(false); // Modo edición de biografía
-  const [tempBio, setTempBio] = useState(''); // Biografía temporal durante edición
+  /**
+   * SECCIÓN 2: ESTADOS Y HOOKS
+   * - username: ID del perfil desde la URL
+   * - currentUser: Usuario logueado (contexto)
+   * - profileUser: Datos del perfil mostrado
+   * - userPosts: Publicaciones del usuario
+   * - isLoading: Estado de carga
+   * - isEditing: Modo edición de biografía
+   * - tempBio: Biografía temporal durante edición
+   */
+  const { username } = useParams();
+  const { currentUser } = useAuth();
+  const [profileUser, setProfileUser] = useState(null);
+  const [userPosts, setUserPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
+  const [tempBio, setTempBio] = useState('');
 
-  // Efecto para cargar datos del perfil y publicaciones
+  /**
+   * SECCIÓN 3: CARGA DE DATOS
+   * - Carga datos del perfil y publicaciones
+   * - Usa datos demo cuando no hay información real
+   */
   useEffect(() => {
     const loadProfileData = async () => {
       try {
-        // Carga en paralelo los datos del perfil y las publicaciones
-        const [profileResponse, postsResponse] = await Promise.all([
-          fetch('/demo-profile.json').then(res => res.json()),
-          fetch('/11-postdemo.json').then(res => res.json())
-        ]);
+        // 1. Cargar datos de invitados reales
+        const guestsResponse = await fetch('/invitados.json');
+        const guestsData = await guestsResponse.json();
         
-        // Filtra posts del usuario actual o del perfil visitado
-        const filteredPosts = postsResponse.filter(
-          post => post.user.id === (username === 'current' ? currentUser.id : parseInt(username))
-        );
+        // 2. Cargar datos demo
+        const demoResponse = await fetch('/demo-profile.json');
+        const demoData = await demoResponse.json();
         
-        // Actualiza estados
-        setProfileUser(profileResponse);
-        setUserPosts(filteredPosts);
-        setTempBio(profileResponse.bio || '');
+        // 3. Buscar usuario en invitados reales
+        let foundUser = null;
+        for (const group of guestsData.grupos) {
+          foundUser = group.invitados.find(inv => 
+            username === 'current' ? inv.id === currentUser?.id : inv.id === parseInt(username)
+          );
+          if (foundUser) break;
+        }
+
+        // 4. Si no se encuentra, buscar en datos demo
+        if (!foundUser) {
+          foundUser = demoData.profiles.find(p => 
+            username === 'current' ? p.id === currentUser?.id : p.id === parseInt(username)
+          );
+        }
+
+        // 5. Si es perfil actual pero no está en ningún archivo
+        if (!foundUser && username === 'current' && currentUser) {
+          foundUser = {
+            id: currentUser.id,
+            nombre: currentUser.name,
+            apellido: currentUser.lastName || '',
+            imagen: currentUser.avatar,
+            relacion: currentUser.relation || 'Invitado/a',
+            bio: currentUser.bio || ''
+          };
+        }
+
+        // 6. Cargar publicaciones
+        let posts = [];
+        if (foundUser?.posts) {
+          posts = [...foundUser.posts];
+        } else {
+          // Usar publicaciones demo si no hay propias
+          const postsResponse = await fetch('/11-postdemo.json');
+          const postsData = await postsResponse.json();
+          posts = postsData.filter(post => post.user.id === (foundUser?.id || 0));
+          
+          // Si no hay posts, usar los default
+          if (posts.length === 0) {
+            posts = [...demoData.defaultPosts];
+          }
+        }
+
+        // 7. Actualizar estado
+        if (foundUser) {
+          setProfileUser({
+            id: foundUser.id,
+            name: foundUser.nombre,
+            lastName: foundUser.apellido,
+            avatar: foundUser.imagen || '/img/09-perfiles/default-avatar.jpg',
+            relation: foundUser.relacion,
+            bio: foundUser.bio || ''
+          });
+          setUserPosts(posts);
+          setTempBio(foundUser.bio || '');
+        }
       } catch (error) {
         console.error("Error loading profile:", error);
       } finally {
@@ -61,56 +117,64 @@ const ProfilePage = () => {
   }, [username, currentUser]);
 
   /**
-   * Maneja el guardado de la biografía editada
-   * (En una implementación real, aquí se haría una petición al backend)
+   * SECCIÓN 4: MANEJADORES
+   * - handleSaveBio: Guarda la biografía editada
    */
   const handleSaveBio = () => {
     setProfileUser({ ...profileUser, bio: tempBio });
     setIsEditing(false);
   };
 
-  // Estados de carga y error
+  // SECCIÓN 5: ESTADOS DE CARGA Y ERROR
   if (isLoading) return <div className="loading-profile">Cargando perfil...</div>;
   if (!profileUser) return <div className="error-profile">Perfil no encontrado</div>;
 
-  // Verifica si el perfil mostrado es del usuario actual
-  const isCurrentUser = username === 'current' || currentUser?.id === parseInt(username);
+  // Verifica si es el perfil del usuario actual
+  const isCurrentUser = username === 'current' || currentUser?.id === profileUser?.id;
 
+  /**
+   * SECCIÓN 6: RENDERIZADO
+   * - Header con avatar y estadísticas
+   * - Información del usuario
+   * - Botones de acción
+   * - Grid de publicaciones
+   */
   return (
     <div className="profile-page">
-      {/* Sección superior con avatar y estadísticas */}
+      {/* Sección superior con avatar y stats */}
       <div className="profile-header">
-        {/* Contenedor del avatar */}
         <div className="profile-avatar-container">
           <img 
-            src={profileUser.avatar || '/img/default-avatar.png'} 
+            src={profileUser.avatar} 
             alt={profileUser.name} 
             className="profile-avatar"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = '/img/09-perfiles/default-avatar.jpg';
+            }}
           />
         </div>
         
-        {/* Estadísticas: publicaciones, seguidores, seguidos */}
         <div className="profile-stats">
           <div className="stat-item">
             <span className="stat-count">{userPosts.length}</span>
             <span className="stat-label">publicaciones</span>
           </div>
           <div className="stat-item">
-            <span className="stat-count">{profileUser.followers || 0}</span>
+            <span className="stat-count">0</span>
             <span className="stat-label">seguidores</span>
           </div>
           <div className="stat-item">
-            <span className="stat-count">{profileUser.following || 0}</span>
+            <span className="stat-count">0</span>
             <span className="stat-label">siguiendo</span>
           </div>
         </div>
       </div>
 
-      {/* Información del usuario: nombre, biografía, relación */}
+      {/* Información del usuario */}
       <div className="profile-info">
-        <h1 className="profile-name">{profileUser.name}</h1>
+        <h1 className="profile-name">{profileUser.name} {profileUser.lastName}</h1>
         
-        {/* Editor de biografía (solo para usuario actual) */}
         {isEditing ? (
           <div className="bio-editor">
             <textarea
@@ -133,32 +197,28 @@ const ProfilePage = () => {
             </div>
           </div>
         ) : (
-          <>
-            <p className="profile-bio">
-              {profileUser.bio || 'No hay biografía aún.'}
-              {isCurrentUser && (
-                <button 
-                  onClick={() => setIsEditing(true)} 
-                  className="edit-bio-btn"
-                  aria-label="Editar biografía"
-                >
-                  ✏️
-                </button>
-              )}
-            </p>
-          </>
+          <p className="profile-bio">
+            {profileUser.bio || 'No hay biografía aún.'}
+            {isCurrentUser && (
+              <button 
+                onClick={() => setIsEditing(true)} 
+                className="edit-bio-btn"
+                aria-label="Editar biografía"
+              >
+                ✏️
+              </button>
+            )}
+          </p>
         )}
         
-        {/* Relación con los novios (específico para boda) */}
         <p className="profile-relation">
           {profileUser.relation || 'Invitado/a'}
         </p>
       </div>
 
-      {/* Botones de acción (diferentes para usuario actual vs otros) */}
+      {/* Botones de acción */}
       <div className="profile-actions">
         {isCurrentUser ? (
-          // Acciones para perfil propio
           <>
             <Link to="/settings" className="action-btn edit-profile">
               Editar perfil
@@ -168,10 +228,9 @@ const ProfilePage = () => {
             </button>
           </>
         ) : (
-          // Acciones para perfiles ajenos
           <>
             <button className="action-btn follow">
-              {profileUser.isFollowing ? 'Siguiendo ✓' : 'Seguir'}
+              Seguir
             </button>
             <button className="action-btn message">
               Mensaje
@@ -189,14 +248,17 @@ const ProfilePage = () => {
                 key={post.id} 
                 to={`/post/${post.id}`} 
                 className="post-thumbnail"
-                aria-label={`Publicación de ${post.user.name}`}
+                aria-label={`Publicación de ${profileUser.name}`}
               >
                 <img 
-                  src={post.imageUrl} 
+                  src={`/11-postdemo/${post.imageUrl.split('/').pop()}`} 
                   alt={post.caption || 'Publicación'} 
                   loading="lazy"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = '/11-postdemo/default-1.jpg';
+                  }}
                 />
-                {/* Overlay con interacciones al hover */}
                 <div className="post-overlay">
                   <span>♥ {post.likes || 0}</span>
                   <span>💬 {post.comments?.length || 0}</span>
@@ -205,7 +267,6 @@ const ProfilePage = () => {
             ))}
           </div>
         ) : (
-          // Mensaje cuando no hay publicaciones
           <div className="no-posts">
             <p>{isCurrentUser ? 'Aún no has publicado nada.' : 'No hay publicaciones aún.'}</p>
             {isCurrentUser && (

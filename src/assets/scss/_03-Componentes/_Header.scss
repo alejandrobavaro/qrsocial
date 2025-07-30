@@ -1,5 +1,5 @@
 /* ============================================= */
-/* ESTILOS HEADER - Versión Completa */
+/* ESTILOS HEADER - Versión Completa             */
 /* ============================================= */
 
 .instagram-header {
@@ -24,34 +24,36 @@
   padding: 0 20px;
 }
 
-/* Logo estilo Instagram */
+/* ========== LOGO CON IMAGEN ========== */
 .header-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   text-decoration: none;
-  
-  h1 {
-    font-family: 'Billabong', cursive;
-    font-size: 24px;
-    font-weight: 500;
-    color: #262626;
-    margin: 0;
+
+  .logo-img {
+    height: 35px;
+    width: auto;
+    padding-right: 10px;
   }
 }
 
-/* Barra de búsqueda (desktop) */
+/* ========== BARRA DE BÚSQUEDA DESKTOP ========== */
 .search-bar {
   display: none;
   position: relative;
-  width: 215px;
-  
+  width: 150px;
+   padding-right: 10px;
+
   .search-input {
     width: 100%;
-    padding: 8px 10px;
-    background: #efefef;
+    padding: 5px 0px;
+    background: #aa838369;
     border: none;
     border-radius: 8px;
     font-size: 14px;
     text-align: center;
-    
+
     &:focus {
       outline: none;
       text-align: left;
@@ -59,36 +61,35 @@
   }
 }
 
-/* Contenedor de navegación */
+/* ========== NAV DE USUARIO AUTENTICADO ========== */
 .nav-container {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-/* Navegación principal */
 .main-nav {
   display: flex;
   gap: 16px;
-  
+
   .nav-icon {
     color: #262626;
     font-size: 24px;
     text-decoration: none;
     display: flex;
     align-items: center;
-    
+
     &:hover {
       color: #8e8e8e;
     }
   }
-  
+
   .mobile-only {
     display: block;
   }
 }
 
-/* Sección de usuario */
+/* ========== AVATAR Y DROPDOWN ========== */
 .user-section {
   position: relative;
 }
@@ -105,7 +106,7 @@
   border: 1px solid #dbdbdb;
 }
 
-/* Menú desplegable */
+/* ========== MENÚ DESPLEGABLE ========== */
 .dropdown-menu {
   position: absolute;
   right: 0;
@@ -116,7 +117,7 @@
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   width: 200px;
   z-index: 1001;
-  
+
   .dropdown-item {
     display: flex;
     align-items: center;
@@ -130,78 +131,90 @@
     font-size: 14px;
     color: #262626;
     text-decoration: none;
-    
+
     &:hover {
       background: #fafafa;
     }
-    
+
     svg {
       font-size: 16px;
     }
   }
 }
 
-/* Opciones de autenticación */
+/* ========== OPCIONES DE AUTENTICACIÓN ========== */
 .auth-options {
   display: flex;
-  gap: 12px;
-  
+  flex-direction: row; 
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+
   .auth-btn {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 8px 12px;
-    border-radius: 4px;
+    justify-content: center;
+    gap: 8px;
+    padding: 5px 0px;
+    border-radius: 6px;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 450;
     cursor: pointer;
     transition: all 0.2s;
+    flex: 1;
     border: none;
-    
+
     &.primary-btn {
-      background-color: #0095f6;
+      background-color: #ad462c;
       color: white;
-      
+
       &:hover {
-        background-color: #0077cc;
+        background-color: #70301c;
       }
     }
-    
+
     &.secondary-btn {
-      background-color: transparent;
-      color: #0095f6;
-      border: 1px solid #dbdbdb;
-      
+     background-color: #ad462c;
+      color: white;
+
       &:hover {
-        background-color: rgba(0, 149, 246, 0.1);
+        background-color: #70301c;
       }
     }
-    
+
     svg {
       font-size: 16px;
     }
   }
 }
 
-/* ============= RESPONSIVE ============= */
+/* ============= BREAKPOINTS ============= */
 
 /* Tablet (768px) */
 @media (min-width: 768px) {
   .instagram-header {
     padding: 0 24px;
   }
-  
+
   .main-nav {
     gap: 24px;
-    
+
     .mobile-only {
       display: none;
     }
   }
-  
+
   .user-avatar {
     width: 32px;
     height: 32px;
+  }
+
+  .auth-options {
+    gap: 12px;
+
+    .auth-btn {
+      padding: 10px 18px;
+    }
   }
 }
 
@@ -210,8 +223,8 @@
   .search-bar {
     display: block;
   }
-  
+
   .auth-options .auth-btn {
-    padding: 8px 16px;
+    padding: 5px 0px;
   }
 }

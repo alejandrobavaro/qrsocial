@@ -1,23 +1,37 @@
 // =============================================
-// ESTILOS STORIES - Historias Temporales
+// ESTILOS STORIES - Versión Mejorada
 // =============================================
 
-// Contenedor principal de stories
+/**
+ * SECCIÓN 1: CONTENEDOR PRINCIPAL
+ * - Diseño mobile-first
+ * - Espaciado optimizado
+ * - Scroll horizontal sin barras
+ */
+.stories-wrapper {
+  width: 100%;
+  padding: 0;
+  margin: 0 auto;
+}
+
 .stories-container {
   display: flex;
   gap: 0.8rem;
-  padding: 1rem 0.5rem;
+  padding: 0.5rem 0.8rem;
   overflow-x: auto;
   background: rgba(255, 255, 255, 0.85);
-  border-radius: 8px;
-  margin-bottom: 1rem;
+  border-bottom: 1px solid #dbdbdb;
   
   // Ocultar scrollbar pero mantener funcionalidad
   &::-webkit-scrollbar {
     display: none;
   }
   
-  // Cada item de story
+  /**
+   * SECCIÓN 2: ITEMS DE STORY
+   * - Tamaños consistentes
+   * - Estilos para estado visto/no visto
+   */
   .story-item {
     display: flex;
     flex-direction: column;
@@ -26,13 +40,15 @@
     cursor: pointer;
     flex-shrink: 0;
     
-    // Contenedor del avatar con borde
+    // Contenedor del avatar
     .story-avatar-wrapper {
       position: relative;
-      width: 66px;
-      height: 66px;
+      width: 64px;
+      height: 64px;
       padding: 2px;
       border-radius: 50%;
+      
+      // Borde degradado para stories no vistas
       background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
       
       // Avatar del usuario
@@ -45,7 +61,7 @@
         display: block;
       }
       
-      // Botón para añadir story (solo en el usuario actual)
+      // Botón para añadir story
       .add-story-btn {
         position: absolute;
         bottom: 0;
@@ -64,10 +80,10 @@
       }
     }
     
-    // Nombre de usuario debajo del avatar
+    // Nombre de usuario
     .story-username {
       font-size: 0.7rem;
-      max-width: 72px;
+      max-width: 64px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -90,11 +106,35 @@
   }
 }
 
-// Estilos responsivos
+/**
+ * SECCIÓN 3: RESPONSIVE DESIGN
+ * - Breakpoints para tablet y desktop
+ * - Incremento progresivo de tamaños
+ */
 @media (min-width: 768px) {
   .stories-container {
+    gap: 1rem;
+    padding: 0.6rem 1rem;
+    border-radius: 0;
+    
+    .story-item {
+      .story-avatar-wrapper {
+        width: 68px;
+        height: 68px;
+      }
+      
+      .story-username {
+        font-size: 0.75rem;
+        max-width: 68px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .stories-container {
     gap: 1.2rem;
-    padding: 1.2rem 0.8rem;
+    padding: 0.8rem 1.2rem;
     
     .story-item {
       .story-avatar-wrapper {
@@ -103,26 +143,8 @@
       }
       
       .story-username {
-        font-size: 0.75rem;
-      }
-    }
-  }
-}
-
-@media (min-width: 1024px) {
-  .stories-container {
-    gap: 1.5rem;
-    padding: 1.5rem 1rem;
-    border-radius: 12px;
-    
-    .story-item {
-      .story-avatar-wrapper {
-        width: 78px;
-        height: 78px;
-      }
-      
-      .story-username {
         font-size: 0.8rem;
+        max-width: 72px;
       }
     }
   }
